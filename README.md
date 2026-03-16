@@ -23,11 +23,11 @@ Sistema de recomendación de películas construido con técnicas de **filtrado c
 
 | Tecnología | Versión | Propósito |
 |------------|---------|-----------|
-| **Polars** | 0.20+ | Procesamiento de datos eficiente [citation:3] |
-| **DuckDB** | 0.9+ | Análisis SQL embebido [citation:4] |
+| **Polars** | 0.20+ | Procesamiento de datos eficiente |
+| **DuckDB** | 0.9+ | Análisis SQL embebido |
 | **Scikit-learn** | 1.3+ | Similitud coseno |
-| **Streamlit** | 1.28+ | Dashboard interactivo [citation:2] |
-| **Plotly** | 5.18+ | Visualizaciones interactivas [citation:5] |
+| **Streamlit** | 1.28+ | Dashboard interactivo |
+| **Plotly** | 5.18+ | Visualizaciones interactivas |
 
 ## 📊 Análisis Realizados
 
