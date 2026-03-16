@@ -2,7 +2,9 @@
 🎬 Movie Recommender System Dashboard
 Dashboard interactivo para sistema de recomendación de películas
 """
-
+import os
+import urllib.request
+import zipfile
 import streamlit as st
 import polars as pl
 import pandas as pd
@@ -25,11 +27,41 @@ st.markdown("---")
 # Cargar datos
 @st.cache_data
 def load_data():
-    """Carga y prepara los datos"""
-    movies = pl.read_csv('data/ml-latest-small/movies.csv')
-    ratings = pl.read_csv('data/ml-latest-small/ratings.csv')
+    """Carga los datos de MovieLens, descargándolos si es necesario"""
     
-    # Extraer año
+    # Definir rutas
+    data_dir = 'data'
+    ml_dir = os.path.join(data_dir, 'ml-latest-small')
+    movies_path = os.path.join(ml_dir, 'movies.csv')
+    ratings_path = os.path.join(ml_dir, 'ratings.csv')
+    
+    # Verificar si los datos existen, si no, descargarlos
+    if not os.path.exists(movies_path) or not os.path.exists(ratings_path):
+        with st.spinner('📥 Descargando dataset MovieLens... (solo la primera vez)'):
+            # Crear directorio si no existe
+            os.makedirs(data_dir, exist_ok=True)
+            
+            # URL del dataset
+            url = "https://files.grouplens.org/datasets/movielens/ml-latest-small.zip"
+            zip_path = os.path.join(data_dir, 'ml-latest-small.zip')
+            
+            # Descargar archivo
+            urllib.request.urlretrieve(url, zip_path)
+            
+            # Extraer archivos
+            with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                zip_ref.extractall(data_dir)
+            
+            # Limpiar archivo zip
+            os.remove(zip_path)
+            
+            st.success('✅ Dataset descargado y extraído correctamente!')
+    
+    # Cargar datos con Polars
+    movies = pl.read_csv(movies_path)
+    ratings = pl.read_csv(ratings_path)
+    
+    # Extraer año (opcional pero útil)
     movies = movies.with_columns(
         pl.col('title')
         .str.extract(r'\((\d{4})\)$', 1)
