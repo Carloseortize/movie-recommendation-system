@@ -11,6 +11,9 @@
 
 Sistema de recomendación de películas construido con técnicas de **filtrado colaborativo** (Item-Based Collaborative Filtering) que permite generar recomendaciones personalizadas basadas en el comportamiento de usuarios. Incluye un **dashboard interactivo** con análisis exploratorio de datos y visualizaciones.
 
+Link app: https://movie-recommendation-system-ceoe.streamlit.app/
+
+
 ### 🎯 ¿Por qué este proyecto?
 
 - Demuestra habilidades de **Data Analyst**: análisis exploratorio, SQL, visualización
